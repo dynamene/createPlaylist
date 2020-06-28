@@ -1,7 +1,7 @@
 const axios = require('axios');
 
 const BASE_URL = 'https://us-central1-play-mo.cloudfunctions.net/';
-const PLATFORMS = ['deezer', 'tidal'];
+const PLATFORMS = ['deezer', 'spotify', 'tidal'];
 
 async function getToken(funcName) {
   const metadataServerURL =
@@ -21,11 +21,11 @@ async function createPlaylist(playlist) {
   });
 
   const res = await axios.all(links);
-  let [deezer, tidal] = res.map((resp) => {
+  let [deezer, spotify, tidal] = res.map((resp) => {
     return resp.data;
   });
 
-  return { deezer, tidal };
+  return { deezer, spotify, tidal };
 }
 
 module.exports = { createPlaylist };
